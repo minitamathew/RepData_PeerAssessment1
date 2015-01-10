@@ -1,6 +1,7 @@
 ---
-title: "Reproducible Research - Assignment 1"
-output: html_document
+output:
+  html_document:
+    keep_md: yes
 ---
 # Reproducible Research - Assignment 1
 
@@ -71,7 +72,7 @@ median_data
 ## [1] 10765
 ```
 
-The mean value is 1.0766189 &times; 10<sup>4</sup> and the median value is 10765. The mean is the average number of total steps taken by the individual in a day. Since missing values are ignored, only those days have been counted where some data have been collected. As expected both the mean and median values are close to each other.
+The mean value is **1.0766189 &times; 10<sup>4</sup>** and the median value is **10765**. The mean is the average number of total steps taken by the individual in a day. Since missing values are ignored, only those days have been counted where some data have been collected. As expected both the mean and median values are close to each other.
 
 - **Average daily activity patern**
 
@@ -99,9 +100,9 @@ int
 ## [1] 835
 ```
 
-Looking at the time series plot for the average daily activiy across all days, we see that the maximum activity takes place between 8 and 10 in the morning. This could indicate that the subject is in the habit of exercising in the morning. A moderate amount of activity is seen between 10 in the morning to 8 in the evening. This might be corresponding to the normal daily activity of the subject like sitting standing etc. As is expected, there is mor or less zero activity late night and early morning.
+Looking at the time series plot for the average daily activiy across all days, we see that the maximum activity takes place between **8** and **10** in the morning. This could indicate that the subject is in the habit of exercising in the morning. A moderate amount of activity is seen between 10 in the morning to 8 in the evening. This might be corresponding to the normal daily activity of the subject like sitting standing etc. As is expected, there is mor or less zero activity late night and early morning.
 
-The time interval that corresponds to the maximum number of steps  is 835. The maximum number of steps during the 835 time interval is given by 206.1698113. this is consitent with our observation of the time series plot.
+The time interval that corresponds to the maximum number of steps  is **835**. The maximum number of steps during the **835** time interval is given by **206.1698113**. this is consitent with our observation of the time series plot.
 
 - **Input missing values**
 
@@ -117,14 +118,16 @@ na_values
 ```
 ## [1] 2304
 ```
- 
- We see that the total number of missing values is 2304. This couple of thousand values is not small. Hence, it makes sense to fill in all of the missing values in the dataset. The strategy that is used is to replace the missing vlaues by the mean for that 5-minute interval averaged across all days. 
-A new dataset is created, denoted by "amd_r" in the code, that is equal to the original dataset but with the missing data filled in. Next a histogram of the total number of steps taken each day is plotted and we also calculate the mean and median of the total number of steps taken per day. 
+
+We see that the total number of missing values is **2304**. This couple of thousand values is not small. Hence, it makes sense to fill in all of the missing values in the dataset. The strategy that is used is to replace the missing values by the mean for that 5-minute interval averaged across all days.
+The indices corresponding to the position of the missing values are found and the NA values present there are replaced by the mean value for the 5 minute interval averaged across all days for that observation. A new dataset is created, denoted by "amd_r" in the code, that is equal to the original dataset but with the missing data filled in. Next a histogram of the total number of steps taken each day is plotted and we also calculate the mean and median of the total number of steps taken per day. 
 
 
 ```r
 amd_r <- amd
+## calculate the position of the missing value
 index <- which(is.na(amd$steps), arr.ind = TRUE)
+## replace the NA values by the mean values for the 5-minute interval
 for (i in 1: length(index)){
         amd_r[index[i],1] <- mean(subset(amd_r$steps, amd_r$interval == amd_r[index[i],3]), na.rm= TRUE)
 }
@@ -156,7 +159,7 @@ median_r
 ## [1] 10766.19
 ```
 
-As is seen, there is not any significant noticeable difference between the two histograms. We also observe that for the mean and median values for this new dataset is 1.0766189 &times; 10<sup>4</sup> and 1.0766189 &times; 10<sup>4</sup>. These values are also **same** or very **close** to the values of mean and median obtained where missing values were ignored. Thus there is **no** or **hardly any** impact on the estimates by inputting missing data.
+As is seen, there is not any significant noticeable difference between the two histograms. We also observe that for the mean and median values for this new dataset is **1.0766189 &times; 10<sup>4</sup>** and **1.0766189 &times; 10<sup>4</sup>**. These values are also **same** or very **close** to the values of mean and median obtained where missing values were ignored. Thus there is **no** or **hardly any** impact on the estimates by inputting missing data.
 
 - **Difference between weekdays and weekends**
 
