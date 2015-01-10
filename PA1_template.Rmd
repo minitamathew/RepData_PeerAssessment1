@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "Reproducible Research - Assignment 1"
 output: html_document
 ---
@@ -143,3 +144,29 @@ with(amd_w,{
 ```
 
 The plots show that on weekdays there is a peak time of activity in 8-10 interval in the morning. Where as on weekends, there is no one such peak that stands out.
+=======
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
+
+
+## Loading and preprocessing the data
+
+
+
+## What is mean total number of steps taken per day?
+
+
+
+## What is the average daily activity pattern?
+
+
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?
+>>>>>>> 80edf39c3bb508fee88e3394542f967dd3fd3270
